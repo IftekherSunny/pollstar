@@ -1,0 +1,18 @@
+<h2>{{ poll.name }}</h2>
+
+<h4>Questions</h4>
+
+<form action="" method="post">
+
+    {% for question in poll.question_set.all %}
+        {{ question.question_text }} <br />
+    
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="{{ question.id }}" value="{{ choice.id }}">{{ choice.choice_text }}<br>
+        {% endfor %}
+    {% endfor %}
+
+    <input type="submit" value="Submit Your Vote">
+
+</form>
+
