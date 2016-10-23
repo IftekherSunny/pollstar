@@ -2,7 +2,8 @@
 
 <h4>Questions</h4>
 
-<form action="" method="post">
+<form action="{% url "vote" id %}" method="post">
+    {% csrf_token %}
 
     {% for question in poll.question_set.all %}
         {{ question.question_text }} <br />

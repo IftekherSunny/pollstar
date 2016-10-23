@@ -11,15 +11,16 @@ class PollAdmin(admin.ModelAdmin):
 admin.site.register(Poll, PollAdmin)
 
 
+# Choice admin model
+class ChoiceAdmin(admin.TabularInline):
+    model = Choice
+    extra = 1
+
+
 # Question admin model
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    inlines = [
+        ChoiceAdmin,
+    ]
 
 admin.site.register(Question, QuestionAdmin)
-
-
-# Choice admin model
-class ChoiceAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(Choice, ChoiceAdmin)
