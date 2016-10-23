@@ -6,7 +6,8 @@ from polls.models import Question
 
 # Poll admin model
 class PollAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'user')
+    list_filter = ('user',)
 
 admin.site.register(Poll, PollAdmin)
 
@@ -19,6 +20,9 @@ class ChoiceAdmin(admin.TabularInline):
 
 # Question admin model
 class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('question_text', 'total_voter', 'pub_date')
+    list_filter = ('question_text', 'pub_date')
+
     inlines = [
         ChoiceAdmin,
     ]
