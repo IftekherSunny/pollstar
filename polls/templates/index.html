@@ -21,6 +21,20 @@
                       </div>
                     {% endfor %}
                 </div>
+
+                <div class="ui mini pagination menu">
+                    {% if polls.has_previous %}
+                        <a  class="active item" href="?page={{ polls.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <div class="disable item">
+                        Page {{ polls.number }} of {{ polls.paginator.num_pages }}
+                    </div>
+
+                    {% if polls.has_next %}
+                        <a class="item"  href="?page={{ polls.next_page_number }}">next</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

@@ -5,6 +5,18 @@
     <div class="ui container">
         <div class="ui row">
             <div class="column 12">
+
+            {% if messages %}
+                <div class="ui success message">
+                  <i class="close icon"></i>
+                  {% for message in messages %}
+                      <div class="header">
+                        {{ message }}
+                      </div>
+                  {% endfor %}
+                </div>
+            {% endif %}
+
                 <h4>{{ poll.name }}</h4>
 
                 <form action="{% url "vote" id %}" method="post">
@@ -37,4 +49,19 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+        <script>
+            $('.ui.radio.checkbox').checkbox();
+
+            $('.message .close')
+              .on('click', function() {
+                $(this)
+                  .closest('.message')
+                  .transition('fade')
+                ;
+              })
+            ;
+        </script>
 {% endblock %}

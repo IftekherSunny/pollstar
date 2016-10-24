@@ -1,14 +1,27 @@
 from polls.models import Poll
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from polls.models import Choice
 from polls.models import Question
+from django.contrib import messages
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def show_polls_list(request):
     ''' Show polls list'''
 
-    polls = Poll.objects.all
+    polls = Poll.objects.all()
+    paginator = Paginator(polls, 10)
+
+    page = request.GET.get('page')
+
+    try:
+        polls = paginator.page(page)
+    except PageNotAnInteger:
+        polls = paginator.page(1)
+    except EmptyPage:
+        polls = paginator.page(paginator.num_pages)
 
     return render(request, 'index.html', {'polls': polls})
 
@@ -49,4 +62,7 @@ def accept_vote(request, id):
                 .filter( id=request.POST[data] )\
                 .update( total_vote= upvote )
 
-    return HttpResponse('done')
+
+    messages.success(request, 'Your vote successfully submitted')
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
