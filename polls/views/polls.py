@@ -10,7 +10,7 @@ def show_polls_list(request):
 
     polls = Poll.objects.all
 
-    return render(request, 'polls/index.html', {'polls': polls})
+    return render(request, 'index.html', {'polls': polls})
 
 
 def show_vote_page(request, id):
@@ -20,7 +20,7 @@ def show_vote_page(request, id):
 
     context = {'poll': poll, 'id': id}
 
-    return render(request, 'polls/vote.html', context)
+    return render(request, 'vote.html', context)
 
 
 def accept_vote(request, id):

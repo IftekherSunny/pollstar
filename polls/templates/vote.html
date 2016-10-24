@@ -1,0 +1,40 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+
+    <div class="ui container">
+        <div class="ui row">
+            <div class="column 12">
+                <h4>{{ poll.name }}</h4>
+
+                <form action="{% url "vote" id %}" method="post">
+                    {% csrf_token %}
+                    <div class="ui form">
+                        {% for question in poll.question_set.all %}
+                            <div class="grouped fields">
+                                <label for="fruit">{{ question.question_text }}</label>
+
+                                {% for choice in question.choice_set.all %}
+                                    <div class="field">
+                                      <div class="ui radio checkbox">
+                                        <input name="{{ question.id }}" value="{{ choice.id }}" checked="" tabindex="0" class="hidden" type="radio">
+                                        <label>{{ choice.choice_text }}</label>
+                                      </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="ui form">
+                        <input type="submit" class="ui button green" value="Submit Your Vote">
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

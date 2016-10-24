@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Polls</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css">
+    </head>
+
+    <body>
+
+        <!-- nav bar -->
+        <div class="ui top menu">
+            <div class="item">
+                <h4>
+                    <a href="/">Polls</a>
+                </h4>
+            </div>
+
+            <a href="https://github.com/IftekherSunny/pollstar" class="item right">Github</a>
+        </div>
+
+        <!-- render child content -->
+        {% block content %}
+        {% endblock %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
+        <script>
+            $('.ui.radio.checkbox').checkbox();
+        </script>
+    </body>
+</html>

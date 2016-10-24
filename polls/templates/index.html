@@ -1,0 +1,28 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+
+    <div class="ui container">
+        <div class="ui row">
+            <div class="column 12">
+                <h4>Available Polls...</h4>
+
+                <div class="ui divided items">
+                    {% for poll in polls %}
+                      <div class="item">
+                        <div class="ui tiny image">
+                          <img src="http://faker.im/250x250">
+                        </div>
+                        <div class="middle aligned content">
+                            <a href="{% url "question" poll.id %}">{{ poll.name }}</a>
+                            <br>
+                            <span>Created by - {{ poll.user }}</span>
+                        </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
