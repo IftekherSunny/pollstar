@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 
 class Poll(models.Model):
+    """
+    Poll model
+    """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
 
@@ -11,6 +15,10 @@ class Poll(models.Model):
 
 
 class Question(models.Model):
+    """
+    Question model
+    """
+
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=200)
     total_voter = models.IntegerField(default=0)
@@ -24,7 +32,9 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    ''' Choice model for the question model '''
+    """
+    Choice model for the question model
+    """
 
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
@@ -33,7 +43,10 @@ class Choice(models.Model):
     total_vote = models.IntegerField(default=0)
 
     def getTotalVoteInPercentage(self):
-        ''' Get total vote in percentage '''
+        """
+        Get total vote in percentage
+        """
+
         if (self.total_vote != 0) and (self.question.total_voter != 0):
            return (self.total_vote / self.question.total_voter) * 100
         else:
@@ -43,5 +56,4 @@ class Choice(models.Model):
         return self.choice_text
 
     class Meta:
-        ''' meta '''
         pass

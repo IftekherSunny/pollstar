@@ -4,22 +4,31 @@ from django.contrib import admin
 from polls.models import Question
 
 
-# Poll admin model
 class PollAdmin(admin.ModelAdmin):
+    """
+    Poll admin model
+    """
+
     list_display = ('name', 'user')
     list_filter = ('user',)
 
 admin.site.register(Poll, PollAdmin)
 
 
-# Choice admin model
 class ChoiceAdmin(admin.TabularInline):
+    """
+    Choice admin model
+    """
+
     model = Choice
     extra = 1
 
 
-# Question admin model
 class QuestionAdmin(admin.ModelAdmin):
+    """
+    Question admin model
+    """
+
     list_display = ('question_text', 'total_voter', 'pub_date')
     list_filter = ('question_text', 'pub_date')
 

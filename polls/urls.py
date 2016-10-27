@@ -1,8 +1,8 @@
-from django.conf.urls import url, include
-from .views import polls
+from django.conf.urls import url
+from polls.views.polls import PollView, VoteView
 
 urlpatterns = [
-    url(r'^$', polls.show_polls_list),
-    url(r'^(?P<id>[0-9]+)/$', polls.show_vote_page, name="question"),
-    url(r'^(?P<id>[0-9]+)/vote$', polls.accept_vote, name="vote"),
+    url(r'^$', PollView.as_view(), name="polls"),
+    url(r'^(?P<id>[0-9]+)/$', VoteView.as_view(), name="question"),
+    url(r'^(?P<id>[0-9]+)/vote$', VoteView.as_view(), name="vote"),
 ]
